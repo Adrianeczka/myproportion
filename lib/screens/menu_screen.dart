@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import '../models/diet_day.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import '../models/product.dart';
 
 class MenuScreen extends StatefulWidget {
   @override
@@ -11,10 +10,9 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  //  DietDay _dietDay= DietDay(id: id, date: date, mealsDay: mealsDay);
   var _dietDay = DietDay();
 
-  Future getDietDay() async {
+  Future<DietDay> getDietDay() async {
     final response = await http.get(
       Uri.parse('https://test-api.myproportion.com/api/v1/public/diet-for-ada'),
     );
@@ -44,14 +42,16 @@ class _MenuScreenState extends State<MenuScreen> {
           title: Text('My menu for today'),
         ),
         body: Center(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text('${_dietDay.mealsDay![index].id}'),
-              );
-            },
-            itemCount: _dietDay.mealsDay!.length,
-          ),
+          child: _dietDay.mealsDay == null
+              ? CircularProgressIndicator()
+              : ListView.builder(
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text('${_dietDay.mealsDay![index].id}'),
+                    );
+                  },
+                  itemCount: _dietDay.mealsDay?.length,
+                ),
         ));
   }
 }
