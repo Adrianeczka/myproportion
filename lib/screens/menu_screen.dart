@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../widgets/menu_item.dart';
-import '../models/products.dart';
-import 'package:provider/provider.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import '../models/product.dart';
 
 class MenuScreen extends StatefulWidget {
   @override
@@ -9,29 +11,47 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+  //  DietDay _dietDay= DietDay(id: id, date: date, mealsDay: mealsDay);
+  var _dietDay = DietDay();
+
+  Future getDietDay() async {
+    final response = await http.get(
+      Uri.parse('https://test-api.myproportion.com/api/v1/public/diet-for-ada'),
+    );
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> dietDayMap = jsonDecode(response.body);
+      return DietDay.fromJson(dietDayMap);
+    } else {
+      throw ("Response error.");
+    }
+  }
+
   @override
-  void didChangeDependencies() {
-    Provider.of<Products>(context).fetchAndSetProducts();
-    super.didChangeDependencies();
+  void initState() {
+    getDietDay().then((value) {
+      setState(() {
+        _dietDay = value;
+      });
+    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context);
-    final products = productsData.items;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My menu for today'),
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(10),
-        itemBuilder: (ctx, i) => MenuItem(
-          products[i].id,
-          products[i].productName,
-          products[i].weight,
+        appBar: AppBar(
+          title: Text('My menu for today'),
         ),
-        itemCount: products.length,
-      ),
-    );
+        body: Center(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('${_dietDay.mealsDay![index].id}'),
+              );
+            },
+            itemCount: _dietDay.mealsDay!.length,
+          ),
+        ));
   }
 }
