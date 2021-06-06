@@ -20,8 +20,8 @@ class _MenuScreenState extends State<MenuScreen> {
     );
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> dietDayMap = jsonDecode(response.body);
-      return DietDay.fromJson(dietDayMap);
+      // Map<String, dynamic> dietDayMap = jsonDecode(response.body);
+      // return DietDay.fromJson(dietDayMap);
     } else {
       throw ("Response error.");
     }
