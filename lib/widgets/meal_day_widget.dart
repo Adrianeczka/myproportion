@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_proportion/controller/providers.dart';
+
+import '../services/get_diet_day.dart';
 
 import '../widgets/product_day_widget.dart';
 import '../models/diet_day.dart';
 
 class MealDayWidget extends ConsumerWidget {
   @override
-  Widget build(BuildContext context,
-      T Function<T>(ProviderBase<Object, T> provider) watch) {
+  Widget build(BuildContext context, ScopedReader watch) {
     AsyncValue<DietDay> _dietDay = watch(getDietDayProvider);
     return Container(
       height: 700,
