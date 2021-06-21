@@ -6,11 +6,14 @@ part 'diet_day.g.dart';
 class DietDay {
   int? id;
   DateTime? date;
-
   @JsonKey(name: 'meals_day')
   final List<MealDay>? mealsDay;
 
-  DietDay({this.id, this.date, this.mealsDay});
+  DietDay({
+    this.id,
+    this.date,
+    this.mealsDay,
+  });
 
   factory DietDay.fromJson(Map<String, dynamic> json) =>
       _$DietDayFromJson(json);
@@ -21,10 +24,8 @@ class DietDay {
 class MealDay {
   int? id;
   DateTime? date;
-
   @JsonKey(name: 'products_day')
-  final List<ProductsDay>? productsDay;
-
+  final List<ProductDay>? productsDay;
   Meal? meal;
   int? index;
 
@@ -32,7 +33,7 @@ class MealDay {
     this.id,
     this.date,
     this.productsDay,
-    // this.meal,
+    this.meal,
     this.index,
   });
 
@@ -43,38 +44,40 @@ class MealDay {
 }
 
 @JsonSerializable()
-class ProductsDay {
+class ProductDay {
+  @JsonKey(name: 'weight_eaten')
   int? weightEaten;
-
   int? id;
   DateTime? date;
-  // Product? product;
-  @JsonKey(ignore: true)
+  Product? product;
   int? weight;
 
+  @JsonKey(name: 'type_change')
   int? typeChange;
+
   int? index;
 
-  ProductsDay({
+  ProductDay({
     this.weightEaten,
     this.id,
     this.date,
-    // this.product,
+    this.product,
     this.weight,
     this.typeChange,
     this.index,
   });
 
-  factory ProductsDay.fromJson(Map<String, dynamic> json) =>
-      _$ProductsDayFromJson(json);
+  factory ProductDay.fromJson(Map<String, dynamic> json) =>
+      _$ProductDayFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ProductsDayToJson(this);
+  Map<String, dynamic> toJson() => _$ProductDayToJson(this);
 }
 
 @JsonSerializable()
 class Product {
   int? id;
   String? name;
+  @JsonKey(name: 'name_pl')
   String? namePl;
   int? weight;
 
@@ -94,8 +97,10 @@ class Product {
 class Meal {
   int? id;
   String? name;
+  @JsonKey(name: 'name_pl')
   String? namePl;
   String? description;
+  @JsonKey(name: 'description_pl')
   String? descriptionPl;
   int? category;
   int? index;
