@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/product_exchange_screen.dart';
 import '../widgets/functions/changingVariousTypeChange.dart';
 
 displayProductsDay(productsDay) {
@@ -11,9 +12,18 @@ displayProductsDay(productsDay) {
         children: [
           ListTile(
             leading: changingVariousTypeChange(productDay.typeChange),
-            title: Text(
-              '${productDay.product!.namePl}',
-              style: TextStyle(fontSize: 16),
+            title: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProductsExchangeScreen()),
+                );
+              },
+              child: Text(
+                '${productDay.product!.namePl}',
+                style: TextStyle(fontSize: 16),
+              ),
             ),
             trailing: Text(
               '${productDay.weight}g',
