@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/product_exchange_screen.dart';
+
 import '../widgets/functions/changingVariousTypeChange.dart';
 
 displayProductsDay(productsDay) {
@@ -14,11 +14,8 @@ displayProductsDay(productsDay) {
             leading: changingVariousTypeChange(productDay.typeChange),
             title: GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ProductsExchangeScreen()),
-                );
+                Navigator.pushNamed(context, '/product_exchange_screen',
+                    arguments: productDay.product.id);
               },
               child: Text(
                 '${productDay.product!.namePl}',

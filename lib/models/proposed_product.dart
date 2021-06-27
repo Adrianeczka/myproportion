@@ -9,6 +9,8 @@ class ProposedProduct {
   String? namePl;
   @JsonKey(name: 'portion_name')
   String? portionName;
+  @JsonKey(name: 'type_change')
+  int? typeChange;
   int? weight;
 
   ProposedProduct({
@@ -16,6 +18,7 @@ class ProposedProduct {
     this.name,
     this.namePl,
     this.portionName,
+    this.typeChange,
     this.weight,
   });
 
