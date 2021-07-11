@@ -15,16 +15,16 @@ displayProductsDay(productsDay) {
             title: GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, '/product_exchange_screen',
-                    arguments: productDay.product.id);
+                    arguments: productDay);
               },
               child: Text(
                 '${productDay.product!.namePl}',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 20),
               ),
             ),
             trailing: Text(
-              '${productDay.weight}g',
-              style: TextStyle(fontSize: 16),
+              '${productDay.weight} g',
+              style: TextStyle(fontSize: 18),
             ),
           ),
           Divider()

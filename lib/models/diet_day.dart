@@ -51,26 +51,45 @@ class ProductDay {
   DateTime? date;
   Product? product;
   int? weight;
+  Category category;
 
   @JsonKey(name: 'type_change')
   int? typeChange;
 
   int? index;
 
-  ProductDay({
-    this.weightEaten,
-    this.id,
-    this.date,
-    this.product,
-    this.weight,
-    this.typeChange,
-    this.index,
-  });
+  ProductDay(
+      {this.weightEaten,
+      this.id,
+      this.date,
+      this.product,
+      this.weight,
+      this.typeChange,
+      this.index,
+      required this.category});
 
   factory ProductDay.fromJson(Map<String, dynamic> json) =>
       _$ProductDayFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductDayToJson(this);
+}
+
+@JsonSerializable()
+class Category {
+  int? id;
+  String? name;
+  @JsonKey(name: 'name_pl')
+  String? namePl;
+
+  Category({
+    this.id,
+    this.name,
+    this.namePl,
+  });
+  factory Category.fromJson(Map<String, dynamic> json) =>
+      _$CategoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }
 
 @JsonSerializable()

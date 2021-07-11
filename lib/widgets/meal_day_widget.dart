@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '/themes/themes.dart';
 
 import '../services/get_diet_day.dart';
 
 import '../widgets/product_day_widget.dart';
 import '../models/diet_day.dart';
 
+//it's render meal's
+
 class MealDayWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     AsyncValue<DietDay> _dietDay = watch(getDietDayProvider);
-    return Container(
-      height: 700,
-      child: Center(
-          child: _dietDay.when(
+    return SingleChildScrollView(
+      child: _dietDay.when(
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
@@ -22,12 +23,15 @@ class MealDayWidget extends ConsumerWidget {
         ),
         data: (_dietDay) {
           return ListView.builder(
+            physics: ScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, mealIndex) {
               var mealDay = _dietDay.mealsDay![mealIndex];
               return Card(
+                color: Theme.of(context).accentColor,
+                shadowColor: CustomColors.gold,
                 elevation: 4,
-                margin: EdgeInsets.symmetric(vertical: 15),
+                margin: EdgeInsets.all(15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -49,7 +53,7 @@ class MealDayWidget extends ConsumerWidget {
             itemCount: _dietDay.mealsDay?.length,
           );
         },
-      )),
+      ),
     );
   }
 }
