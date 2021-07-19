@@ -1,6 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:core';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 part 'diet_day.g.dart';
+part 'diet_day.freezed.dart';
+
+@freezed
+class Parameters with _$Parameters {
+  factory Parameters(int? categoryId, int? typeDietId) = _Parameters;
+}
 
 @JsonSerializable()
 class DietDay {
@@ -8,16 +18,22 @@ class DietDay {
   DateTime? date;
   @JsonKey(name: 'meals_day')
   final List<MealDay>? mealsDay;
+  Diet? diet;
 
-  DietDay({
-    this.id,
-    this.date,
-    this.mealsDay,
-  });
+  DietDay({this.id, this.date, this.mealsDay, this.diet});
 
   factory DietDay.fromJson(Map<String, dynamic> json) =>
       _$DietDayFromJson(json);
   Map<String, dynamic> toJson() => _$DietDayToJson(this);
+}
+
+@JsonSerializable()
+class Diet {
+  int? type;
+  Diet({this.type});
+
+  factory Diet.fromJson(Map<String, dynamic> json) => _$DietFromJson(json);
+  Map<String, dynamic> toJson() => _$DietToJson(this);
 }
 
 @JsonSerializable()
@@ -51,45 +67,26 @@ class ProductDay {
   DateTime? date;
   Product? product;
   int? weight;
-  Category category;
 
   @JsonKey(name: 'type_change')
   int? typeChange;
 
   int? index;
 
-  ProductDay(
-      {this.weightEaten,
-      this.id,
-      this.date,
-      this.product,
-      this.weight,
-      this.typeChange,
-      this.index,
-      required this.category});
+  ProductDay({
+    this.weightEaten,
+    this.id,
+    this.date,
+    this.product,
+    this.weight,
+    this.typeChange,
+    this.index,
+  });
 
   factory ProductDay.fromJson(Map<String, dynamic> json) =>
       _$ProductDayFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductDayToJson(this);
-}
-
-@JsonSerializable()
-class Category {
-  int? id;
-  String? name;
-  @JsonKey(name: 'name_pl')
-  String? namePl;
-
-  Category({
-    this.id,
-    this.name,
-    this.namePl,
-  });
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }
 
 @JsonSerializable()
@@ -99,17 +96,37 @@ class Product {
   @JsonKey(name: 'name_pl')
   String? namePl;
   int? weight;
+  Category? category;
 
-  Product({
-    this.id,
-    this.name,
-    this.namePl,
-    this.weight,
-  });
+  Product({this.id, this.name, this.namePl, this.weight, this.category});
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductToJson(this);
+}
+
+@JsonSerializable()
+class Category {
+  int? id;
+  String? name;
+  @JsonKey(name: 'name_pl')
+  String? namePl;
+  Category({this.id, this.name, this.namePl});
+
+  factory Category.fromJson(Map<String, dynamic> json) =>
+      _$CategoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CategoryToJson(this);
+}
+
+class CategoryList {
+  List<Category>? categoryList;
+
+  CategoryList([this.categoryList]);
+
+  factory CategoryList.fromJson(List<dynamic> json) {
+    return CategoryList(json.map((e) => Category.fromJson(e)).toList());
+  }
 }
 
 @JsonSerializable()

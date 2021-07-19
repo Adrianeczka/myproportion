@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_proportion/services/get_categories.dart';
 
 import '../models/diet_day.dart';
 import '../widgets/exchange_box.dart';
@@ -21,8 +22,6 @@ final exchangeProductProvider = Provider.autoDispose
   final searchedByNameProvider =
       ref.watch(getProductByNameProvider(productDay.id!));
 
-  // final searchByCategoryProvider = ref.watch(getCategoriesProvider());
-
   final proButtonProvider =
       ref.watch(getProposedProductProvider(productDay.product!.id!));
 
@@ -32,8 +31,5 @@ final exchangeProductProvider = Provider.autoDispose
 
     case ExchangeProductState.searchedByName:
       return searchedByNameProvider;
-
-    // case ExchangeProductState.searchedByCategory:
-    //   return searchByCategoryProvider;
   }
 });

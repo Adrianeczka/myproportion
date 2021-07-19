@@ -13,6 +13,9 @@ DietDay _$DietDayFromJson(Map<String, dynamic> json) {
     mealsDay: (json['meals_day'] as List<dynamic>?)
         ?.map((e) => MealDay.fromJson(e as Map<String, dynamic>))
         .toList(),
+    diet: json['diet'] == null
+        ? null
+        : Diet.fromJson(json['diet'] as Map<String, dynamic>),
   );
 }
 
@@ -20,6 +23,17 @@ Map<String, dynamic> _$DietDayToJson(DietDay instance) => <String, dynamic>{
       'id': instance.id,
       'date': instance.date?.toIso8601String(),
       'meals_day': instance.mealsDay,
+      'diet': instance.diet,
+    };
+
+Diet _$DietFromJson(Map<String, dynamic> json) {
+  return Diet(
+    type: json['type'] as int?,
+  );
+}
+
+Map<String, dynamic> _$DietToJson(Diet instance) => <String, dynamic>{
+      'type': instance.type,
     };
 
 MealDay _$MealDayFromJson(Map<String, dynamic> json) {
@@ -55,7 +69,6 @@ ProductDay _$ProductDayFromJson(Map<String, dynamic> json) {
     weight: json['weight'] as int?,
     typeChange: json['type_change'] as int?,
     index: json['index'] as int?,
-    category: Category.fromJson(json['category'] as Map<String, dynamic>),
   );
 }
 
@@ -66,9 +79,28 @@ Map<String, dynamic> _$ProductDayToJson(ProductDay instance) =>
       'date': instance.date?.toIso8601String(),
       'product': instance.product,
       'weight': instance.weight,
-      'category': instance.category,
       'type_change': instance.typeChange,
       'index': instance.index,
+    };
+
+Product _$ProductFromJson(Map<String, dynamic> json) {
+  return Product(
+    id: json['id'] as int?,
+    name: json['name'] as String?,
+    namePl: json['name_pl'] as String?,
+    weight: json['weight'] as int?,
+    category: json['category'] == null
+        ? null
+        : Category.fromJson(json['category'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'name_pl': instance.namePl,
+      'weight': instance.weight,
+      'category': instance.category,
     };
 
 Category _$CategoryFromJson(Map<String, dynamic> json) {
@@ -83,22 +115,6 @@ Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'name_pl': instance.namePl,
-    };
-
-Product _$ProductFromJson(Map<String, dynamic> json) {
-  return Product(
-    id: json['id'] as int?,
-    name: json['name'] as String?,
-    namePl: json['name_pl'] as String?,
-    weight: json['weight'] as int?,
-  );
-}
-
-Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'name_pl': instance.namePl,
-      'weight': instance.weight,
     };
 
 Meal _$MealFromJson(Map<String, dynamic> json) {

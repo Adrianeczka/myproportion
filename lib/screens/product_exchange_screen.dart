@@ -12,7 +12,6 @@ class ProductsExchangeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var parameters;
     return Scaffold(
       appBar: AppBar(
         title: Text('Wymiana produktu'),
@@ -25,9 +24,7 @@ class ProductsExchangeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ExchangeBox(
-              productDay: parameters,
-            ),
+            ExchangeBox(),
             Consumer(builder: (context, watch, child) {
               final proposedProduct =
                   watch(exchangeProductProvider(productDay));

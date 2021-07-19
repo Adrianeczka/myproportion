@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_proportion/freezed_classes.dart';
-import 'package:my_proportion/models/diet_day.dart';
+
 import '../widgets/category_box.dart';
 import '../widgets/hero_dialog_route.dart';
 import '../widgets/debouncer.dart';
@@ -16,19 +15,8 @@ final exchangeProductStateProvider =
     StateProvider<ExchangeProductState>((ref) => ExchangeProductState.pro);
 
 class ExchangeBox extends ConsumerWidget {
-  final List buttonName = ['Podobne', 'Pro', 'Dobre', 'Średnie'];
-  final List buttonColor = [
-    CustomColors.lightBlue,
-    CustomColors.gold,
-    CustomColors.green,
-    CustomColors.yellow
-  ];
   final _debouncer = Debouncer(milliseconds: 1000);
 
-  final ProductDay productDay;
-  final Parameters? parameters;
-
-  ExchangeBox({required this.productDay, this.parameters});
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Card(
@@ -80,10 +68,73 @@ class ExchangeBox extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ExchangeButton(buttonName[0], buttonColor[0]),
-                  ExchangeButton(buttonName[1], buttonColor[1]),
-                  ExchangeButton(buttonName[2], buttonColor[2]),
-                  ExchangeButton(buttonName[3], buttonColor[3]),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Podobne',
+                        style: TextStyle(color: Colors.black54)),
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(4),
+                      shadowColor: MaterialStateProperty.all(CustomColors.gold),
+                      backgroundColor: MaterialStateProperty.all(
+                        CustomColors.lightBlue,
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Pro', style: TextStyle(color: Colors.black54)),
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(4),
+                      shadowColor: MaterialStateProperty.all(CustomColors.gold),
+                      backgroundColor: MaterialStateProperty.all(
+                        CustomColors.gold,
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child:
+                        Text('Dobre', style: TextStyle(color: Colors.black54)),
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(4),
+                      shadowColor: MaterialStateProperty.all(CustomColors.gold),
+                      backgroundColor: MaterialStateProperty.all(
+                        CustomColors.green,
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Średnie',
+                        style: TextStyle(color: Colors.black54)),
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(4),
+                      shadowColor: MaterialStateProperty.all(CustomColors.gold),
+                      backgroundColor: MaterialStateProperty.all(
+                        CustomColors.yellow,
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               )
             ],
@@ -104,33 +155,6 @@ class ExchangeBox extends ConsumerWidget {
               ExchangeProductState.searchedByName;
         });
       },
-    );
-  }
-}
-
-//Button
-
-class ExchangeButton extends StatelessWidget {
-  final String buttonName;
-  final Color buttonColor;
-
-  const ExchangeButton(this.buttonName, this.buttonColor);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text(buttonName, style: TextStyle(color: Colors.black54)),
-      style: ButtonStyle(
-        elevation: MaterialStateProperty.all(4),
-        shadowColor: MaterialStateProperty.all(CustomColors.gold),
-        backgroundColor: MaterialStateProperty.all(buttonColor),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-        ),
-      ),
     );
   }
 }
