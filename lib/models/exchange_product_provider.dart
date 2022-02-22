@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_proportion/services/get_categories.dart';
 
 import '../models/diet_day.dart';
 import '../widgets/exchange_box.dart';
@@ -17,7 +16,7 @@ enum ExchangeProductState {
 
 final exchangeProductProvider = Provider.autoDispose
     .family<AsyncValue<ProposedProductList>?, ProductDay>((ref, productDay) {
-  final state = ref.watch(exchangeProductStateProvider).state;
+  final state = ref.watch(exchangeProductStateProvider);
 
   final searchedByNameProvider =
       ref.watch(getProductByNameProvider(productDay.id!));

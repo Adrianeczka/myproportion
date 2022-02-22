@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_proportion/themes/themes.dart';
 
 class MenuButton extends StatelessWidget {
   final String nameMenuButton;
@@ -35,7 +36,7 @@ class MenuButton extends StatelessWidget {
                 ),
                 child: Text(nameMenuButton, style: TextStyle(fontSize: 17)),
                 decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
+                    color: CustomColors.ecru,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(95),
                       topRight: Radius.circular(150),

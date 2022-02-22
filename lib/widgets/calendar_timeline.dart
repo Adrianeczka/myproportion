@@ -7,7 +7,7 @@ final dateTimeProvider = StateProvider<DateTime?>((ref) => DateTime.now());
 
 class Calendar extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       child: CalendarTimeline(
         showYears: false,
@@ -15,7 +15,7 @@ class Calendar extends ConsumerWidget {
         firstDate: DateTime.now(),
         lastDate: DateTime.now().add(Duration(days: 365)),
         onDateSelected: (data) {
-          context.read(dateTimeProvider).state = data;
+          ref.read(dateTimeProvider.state).state = data;
         },
         leftMargin: 20,
         monthColor: Colors.teal[500],

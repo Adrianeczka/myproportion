@@ -18,7 +18,7 @@ class ExchangeBox extends ConsumerWidget {
   final _debouncer = Debouncer(milliseconds: 1000);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       elevation: 6,
       shadowColor: CustomColors.gold,
@@ -40,7 +40,7 @@ class ExchangeBox extends ConsumerWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: _buildSearchByName(context),
+                child: _buildSearchByName(ref, context),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -144,14 +144,14 @@ class ExchangeBox extends ConsumerWidget {
     );
   }
 
-  TextFormField _buildSearchByName(BuildContext context) {
+  TextFormField _buildSearchByName(WidgetRef ref, BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(labelText: 'Wyszukaj produkt po nazwie'),
       onChanged: (textFromSearchProductByName) {
         _debouncer.run(() {
-          context.read(searchProductProvider).state =
+          ref.read(searchProductProvider.state).state =
               textFromSearchProductByName;
-          context.read(exchangeProductStateProvider).state =
+          ref.read(exchangeProductStateProvider.state).state =
               ExchangeProductState.searchedByName;
         });
       },

@@ -7,7 +7,7 @@ import '../models/http_exception.dart';
 import '../models/diet_day.dart';
 
 final getDietDayProvider = FutureProvider<DietDay>((ref) async {
-  final selectedDate = ref.watch(dateTimeProvider).state;
+  final selectedDate = ref.watch(dateTimeProvider.state).state;
   final dietDay = getDietDay(selectedDate);
   // final dietTypeProvider = Provider((ref) => dietDay.diet.type);
   return dietDay;

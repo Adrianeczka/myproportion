@@ -11,8 +11,8 @@ import '../models/diet_day.dart';
 
 class MealDayWidget extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    AsyncValue<DietDay> _dietDay = watch(getDietDayProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    AsyncValue<DietDay> _dietDay = ref.watch(getDietDayProvider);
     return SingleChildScrollView(
       child: _dietDay.when(
         loading: () => const Center(
@@ -28,7 +28,7 @@ class MealDayWidget extends ConsumerWidget {
             itemBuilder: (context, mealIndex) {
               var mealDay = _dietDay.mealsDay![mealIndex];
               return Card(
-                color: Theme.of(context).accentColor,
+                color: CustomColors.ecru,
                 shadowColor: CustomColors.gold,
                 elevation: 4,
                 margin: EdgeInsets.all(15),

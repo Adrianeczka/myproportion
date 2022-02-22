@@ -25,9 +25,9 @@ class ProductsExchangeScreen extends StatelessWidget {
         child: Column(
           children: [
             ExchangeBox(),
-            Consumer(builder: (context, watch, child) {
+            Consumer(builder: (context, ref, child) {
               final proposedProduct =
-                  watch(exchangeProductProvider(productDay));
+                  ref.watch(exchangeProductProvider(productDay));
               return proposedProduct!.when(
                 loading: () => Center(
                   child: CircularProgressIndicator(),

@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screens/home_screen.dart';
 import '../screens/menu_screen.dart';
 import '../screens/product_exchange_screen.dart';
-import '../themes/themes.dart';
 
 void main() => runApp(
       ProviderScope(
@@ -18,11 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MyProportion',
       theme: ThemeData(
-        fontFamily: 'Montserrat',
-        primaryColor: Colors.teal[100],
-        primarySwatch: Colors.blueGrey,
-        accentColor: CustomColors.ecru,
-      ),
+          fontFamily: 'Montserrat',
+          primaryColor: Colors.teal[100],
+          primarySwatch: Colors.blueGrey),
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/':
