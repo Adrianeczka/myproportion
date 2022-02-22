@@ -1,4 +1,4 @@
-# shopp_app
+# MyProportion
 
 A new Flutter project.
 
