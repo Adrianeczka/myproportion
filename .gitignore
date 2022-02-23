@@ -30,6 +30,10 @@
 .pub-cache/
 .pub/
 /build/
+/lib/models/diet_day.g.dart
+/lib/models/diet_day.freezed.dart
+/lib/models/proposed_product.g.dart
+
 
 # Web related
 lib/generated_plugin_registrant.dart
