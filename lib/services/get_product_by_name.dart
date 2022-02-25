@@ -21,9 +21,7 @@ final getProductByNameProvider = FutureProvider.family<ProductList, ProductDay>(
   );
   if (response.statusCode == 200) {
     List<dynamic> productList = jsonDecode(response.body);
-    var kamilek = ProductList.fromJson(productList);
-    return kamilek;
-    // return ProductList.fromJson(productList);
+    return ProductList.fromJson(productList);
   } else if (response.statusCode == 204) {
     return ProductList();
   } else {
