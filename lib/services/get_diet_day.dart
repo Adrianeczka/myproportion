@@ -7,7 +7,7 @@ import '../models/http_exception.dart';
 import '../models/diet_day.dart';
 
 final getDietDayProvider = FutureProvider<DietDay>((ref) async {
-  final selectedDate = ref.watch(dateTimeProvider.state).state;
+  final selectedDate = ref.watch(dateTimeProvider);
   final dietDay = getDietDay(selectedDate);
   // final dietTypeProvider = Provider((ref) => dietDay.diet.type);
   return dietDay;
@@ -15,7 +15,7 @@ final getDietDayProvider = FutureProvider<DietDay>((ref) async {
 
 Future<DietDay> getDietDay(date) async {
   final response = await http.post(
-    Uri.parse('https://api.myproportion.com/api/v1/public/diet-for-ada'),
+    Uri.parse('https://test-api.myproportion.com/api/v1/public/diet-for-ada'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -30,6 +30,6 @@ Future<DietDay> getDietDay(date) async {
   } else if (response.statusCode == 204) {
     return DietDay();
   } else {
-    throw HttpException('DietDay does not exist.');
+    throw HttpException('Diet doesn\'t exist, we have bug.');
   }
 }

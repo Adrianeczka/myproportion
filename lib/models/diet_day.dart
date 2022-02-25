@@ -21,8 +21,7 @@ class DietDay {
 
   DietDay({this.id, this.date, this.mealsDay, this.diet});
 
-  factory DietDay.fromJson(Map<String, dynamic> json) =>
-      _$DietDayFromJson(json);
+  factory DietDay.fromJson(Map<String, dynamic> json) => _$DietDayFromJson(json);
   Map<String, dynamic> toJson() => _$DietDayToJson(this);
 }
 
@@ -52,8 +51,7 @@ class MealDay {
     this.index,
   });
 
-  factory MealDay.fromJson(Map<String, dynamic> json) =>
-      _$MealDayFromJson(json);
+  factory MealDay.fromJson(Map<String, dynamic> json) => _$MealDayFromJson(json);
 
   Map<String, dynamic> toJson() => _$MealDayToJson(this);
 }
@@ -82,8 +80,7 @@ class ProductDay {
     this.index,
   });
 
-  factory ProductDay.fromJson(Map<String, dynamic> json) =>
-      _$ProductDayFromJson(json);
+  factory ProductDay.fromJson(Map<String, dynamic> json) => _$ProductDayFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductDayToJson(this);
 }
@@ -94,12 +91,23 @@ class Product {
   String? name;
   @JsonKey(name: 'name_pl')
   String? namePl;
+  @JsonKey(name: 'portion_name')
+  String? portionName;
+  @JsonKey(name: 'type_change')
+  int? typeChange;
   int? weight;
   Category? category;
 
-  Product({this.id, this.name, this.namePl, this.weight, this.category});
-  factory Product.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
+  Product({
+    this.id,
+    this.name,
+    this.namePl,
+    this.portionName,
+    this.typeChange,
+    this.weight,
+    this.category,
+  });
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 }
@@ -112,8 +120,7 @@ class Category {
   String? namePl;
   Category({this.id, this.name, this.namePl});
 
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
+  factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
 
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }

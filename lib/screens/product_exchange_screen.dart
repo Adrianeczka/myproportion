@@ -8,7 +8,7 @@ import '../models/exchange_product_provider.dart';
 class ProductsExchangeScreen extends StatelessWidget {
   final productDay;
 
-  const ProductsExchangeScreen({@required this.productDay});
+  ProductsExchangeScreen({@required this.productDay});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,8 @@ class ProductsExchangeScreen extends StatelessWidget {
           children: [
             ExchangeBox(),
             Consumer(builder: (context, ref, child) {
-              final proposedProduct =
-                  ref.watch(exchangeProductProvider(productDay));
-              return proposedProduct!.when(
+              final proposedProduct = ref.watch(exchangeProductProvider(productDay));
+              return proposedProduct.when(
                 loading: () => Center(
                   child: CircularProgressIndicator(),
                 ),
@@ -40,12 +39,11 @@ class ProductsExchangeScreen extends StatelessWidget {
                     physics: ScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      var product = proposedProduct.proposedProductList?[index];
+                      var product = proposedProduct.productList?[index];
                       return Column(
                         children: [
                           ListTile(
-                            leading:
-                                changingVariousTypeChange(product?.typeChange),
+                            leading: changingVariousTypeChange(product?.typeChange),
                             title: Text(
                               '${product?.namePl}',
                               style: TextStyle(fontSize: 18),
@@ -60,7 +58,7 @@ class ProductsExchangeScreen extends StatelessWidget {
                         ],
                       );
                     },
-                    itemCount: proposedProduct.proposedProductList?.length,
+                    itemCount: proposedProduct.productList?.length,
                   );
                 },
               );

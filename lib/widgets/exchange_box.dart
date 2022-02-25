@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../widgets/category_box.dart';
-import '../widgets/hero_dialog_route.dart';
 import '../widgets/debouncer.dart';
 
 import '../models/exchange_product_provider.dart';
 
 import '../themes/themes.dart';
 
-final searchProductProvider = StateProvider<String?>((ref) => null);
+final searchProductProvider = StateProvider<String>((ref) => '');
 
 final exchangeProductStateProvider =
     StateProvider<ExchangeProductState>((ref) => ExchangeProductState.pro);
@@ -46,11 +44,14 @@ class ExchangeBox extends ConsumerWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                      HeroDialogRoute(
-                        builder: (context) => CategoryBox(),
-                      ),
-                    );
+                    /**
+                     * @todo
+                     */
+                    // Navigator.of(context).push(
+                    //   HeroDialogRoute(
+                    //     builder: (context) => CategoryBox(),
+                    //   ),
+                    // );
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -149,9 +150,9 @@ class ExchangeBox extends ConsumerWidget {
       decoration: InputDecoration(labelText: 'Wyszukaj produkt po nazwie'),
       onChanged: (textFromSearchProductByName) {
         _debouncer.run(() {
-          ref.read(searchProductProvider.state).state =
+          ref.read(searchProductProvider.notifier).state =
               textFromSearchProductByName;
-          ref.read(exchangeProductStateProvider.state).state =
+          ref.read(exchangeProductStateProvider.notifier).state =
               ExchangeProductState.searchedByName;
         });
       },
